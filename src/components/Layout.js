@@ -21,17 +21,15 @@ const Layout = () => {
   return (
     <>
       <header>
-        <nav>
-          <ul>
-            <li>
-              <NavLink to="/">Home</NavLink>
-            </li>
+        <ul>
+          <li>
+            <NavLink to="/">Home</NavLink>
+          </li>
 
-            <li>
-              <NavLink to="/movies">Movies</NavLink>
-            </li>
-          </ul>
-        </nav>
+          <li>
+            <NavLink to="/movies">Movies</NavLink>
+          </li>
+        </ul>
       </header>
       <main>
         <Outlet />
