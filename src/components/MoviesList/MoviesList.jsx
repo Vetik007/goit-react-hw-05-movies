@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import { Outlet, useLocation } from 'react-router-dom';
-import { AiFillBackward } from 'react-icons/ai';
+import { AiOutlineFileImage } from 'react-icons/ai';
 
 import {
   MovieList,
@@ -31,7 +31,7 @@ const MoviesList = ({ movies }) => {
                 {poster_path ? (
                   <MovieImg src={imgBaseUrl.concat(poster_path)} alt={title} />
                 ) : (
-                  <AiFillBackward size={200} />
+                  <AiOutlineFileImage size={200} />
                 )}
                 <MovieName>{title ?? original_name}</MovieName>
               </Box>

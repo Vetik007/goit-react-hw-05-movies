@@ -18,7 +18,7 @@ const Movies = () => {
   const handleOnSubmit = query => {
     const changeParams = query !== '' ? { query } : {};
     setSearchParams(changeParams);
-    console.log(changeParams);
+    // console.log(changeParams);
   };
 
   useEffect(() => {
