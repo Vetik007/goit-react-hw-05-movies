@@ -1,37 +1,44 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { getMovieCast } from 'services/fetchMovies';
-import { NoCast } from 'Error/NoCast';
-import { List, Item, Img, Name, Character } from './Cast.styled';
+import { fetchCastMovie } from '../../servicesApi/TmdbApi';
+import { AiOutlineFileImage } from 'react-icons/ai';
+import { CastCard, CastContainer, Paragraf } from './Cast.styled';
 
 const Cast = () => {
-  const [cast, setCast] = useState(null);
+  const [moviesCast, setMoviesCast] = useState([]);
   const { movieId } = useParams();
-  const imgBaseUrl = 'https://image.tmdb.org/t/p/w500/';
 
   useEffect(() => {
-    getMovieCast(movieId).then(setCast);
+    fetchCastMovie(movieId).then(moviesCast => {
+      setMoviesCast(moviesCast);
+    });
   }, [movieId]);
 
-  if (!cast) {
+  if (!moviesCast) {
     return;
   }
 
   return (
-    <List>
-      {cast.length === 0 && <NoCast />}
-
-      {cast.map(({ id, profile_path, name, character }) => (
-        <Item key={id}>
-          <Img src={imgBaseUrl.concat(profile_path)} alt="" />
-          <div>
-            <Name>{name}</Name>
-            <Character>{character}</Character>
-          </div>
-        </Item>
-      ))}
-    </List>
+    <CastContainer>
+      {moviesCast.length > 0 ? (
+        moviesCast.map(({ id, profile_path, character, name }) => (
+          <CastCard key={id}>
+            {profile_path ? (
+              <img
+                src={`https://image.tmdb.org/t/p/w300${profile_path}`}
+                alt={name}
+              />
+            ) : (
+              <AiOutlineFileImage size={200} />
+            )}
+            <Paragraf>{name}</Paragraf>
+            <Paragraf>Character : {character.substr(0, 9)}</Paragraf>
+          </CastCard>
+        ))
+      ) : (
+        <Paragraf>Sorry, there isn't any info</Paragraf>
+      )}
+    </CastContainer>
   );
 };
-
 export default Cast;

@@ -1,22 +1,24 @@
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { fetchSearchMovies } from '../../ServisesApi/TmdbApi';
-import SearchFilm from '../../SearchFilm/SearchFilm';
-import MoviesList from '../../MovieList/MovieList';
-// import Title from '../components/Title/Title';
-import Loader from '../../Loader/Loader';
+import { fetchSearchMovies } from '../servicesApi/TmdbApi';
+import SearchForm from '../components/Form/Form';
+import MoviesList from '../components/MoviesList/MoviesList';
+import Loader from '../components/Loader/Loader';
 
 const Movies = () => {
   const [searchParams, setSearchParams] = useSearchParams();
+  // console.log(searchParams);
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
   const moviesName = searchParams.get('query') ?? '';
+  // console.log(moviesName);
 
   const handleOnSubmit = query => {
     const changeParams = query !== '' ? { query } : {};
     setSearchParams(changeParams);
+    console.log(changeParams);
   };
 
   useEffect(() => {
@@ -33,9 +35,8 @@ const Movies = () => {
 
   return (
     <>
-      <h1>Title title="Search for your movie 😎" </h1>
       {error && <h2>{error.message}</h2>}
-      <SearchFilm value={moviesName} onSearch={handleOnSubmit} />
+      <SearchForm searchMovies={handleOnSubmit} />
       {movies.length > 0 && <MoviesList movies={movies} />}
       {loading && <Loader />}
     </>
