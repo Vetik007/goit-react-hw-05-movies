@@ -16,6 +16,7 @@ const MoviesDetails = () => {
   const { movieId } = useParams();
   const location = useLocation();
   // console.log(location);
+
   const buttonBack = location.state?.from ?? `/`;
   // console.log(buttonBack);
 
@@ -54,10 +55,14 @@ const MoviesDetails = () => {
       <Container>
         <h3>Additional information</h3>
         <li>
-          <Links to="cast">Cast</Links>
+          <Links to="cast" state={{ from: buttonBack }}>
+            Cast
+          </Links>
         </li>
         <li>
-          <Links to="reviews">Reviews</Links>
+          <Links to="reviews" state={{ from: buttonBack }}>
+            Reviews
+          </Links>
         </li>
       </Container>
 
