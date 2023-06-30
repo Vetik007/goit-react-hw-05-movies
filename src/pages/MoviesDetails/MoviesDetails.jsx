@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Outlet, useLocation, useParams } from 'react-router-dom';
 import { fetchMovieDetails } from '../../servicesApi/TmdbApi';
 import ButtonBack from 'components/ButtonBack/ButtonBack';
+
 import {
   Wrap,
   Img,
